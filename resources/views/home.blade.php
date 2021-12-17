@@ -10,14 +10,14 @@
             <x-publish-tweet />
 
             <div class="border border-gray-300 rounded-lg">
-                <x-timeline/>
-                <x-timeline/>
-                <x-timeline/>
+
+                <x-timeline :tweets="$tweets"/>
+
             </div>
         </div>
 
         <div class="lg:w-1/6 bg-gray-100 p-4">
-            <x-friends-list />
+            <x-friends-list :tweets="$tweets"/>
         </div>
 
     </div>
