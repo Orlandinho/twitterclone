@@ -59,6 +59,20 @@ class User extends Authenticatable
 
     public function timeline()
     {
-        return Tweet::where('user_id', $this->id)->latest()->get();
+//        return Tweet::where('user_id', $this->id)
+//            ->latest()
+//            ->get();
+
+        $friends = $this->follows()->pluck('id');
+
+        return Tweet::whereIn('user_id', $friends)
+            ->orWhere('user_id', $this->id)
+            ->latest()
+            ->get();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name'; //makes the model recover its data from this specific column from its table, which is id by default
     }
 }

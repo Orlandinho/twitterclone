@@ -7,7 +7,8 @@
         </div>
 
         <div class="lg:flex-1 lg:mx-10" style="max-width: 700px;">
-            <x-publish-tweet />
+
+            <x-profile :user="$user"/>
 
             <div class="border border-gray-300 rounded-lg">
 
@@ -16,7 +17,7 @@
             </div>
         </div>
 
-        <div class="lg:w-1/6 bg-gray-100 p-4">
+        <div class="lg:w-1/6">
             <x-friends-list :tweets="$tweets"/>
         </div>
 

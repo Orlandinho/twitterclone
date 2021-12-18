@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,9 +14,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [TweetController::class, 'index'])->name('home');
 
-Route::post('/tweets', [TweetController::class, 'store']);
+Route::middleware('auth')->group(function(){
+
+    Route::get('/', [TweetController::class, 'index'])->name('home');
+
+    Route::post('/tweets', [TweetController::class, 'store']);
+
+    Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
+});
+
+
+
 
 Route::get('/welcome', function () {
     return view('welcome');
