@@ -13,9 +13,9 @@
 
         <div class="flex justify-between">
             <a href="{{ route('profile', auth()->user()) }}">
-                <img src="https://i.pravatar.cc/40?img={{ auth()->user()->id }}"
+                <img src="{{ auth()->user()->avatar ? auth()->user()->avatar : asset('/avatars/default.jpeg') }}"
                     alt="avatar"
-                    class="rounded-full">
+                    class="rounded-full w-10">
             </a>
             <button type="submit"
                     class="bg-blue-500 text-white hover:bg-white hover:text-blue-500 ring-1 rounded-xl ring-blue-500 shadow-sm shadow-blue-500/50 px-3">

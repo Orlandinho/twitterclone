@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-50 h-50 fill-current text-gray-500" />
             </a>
         </x-slot>
 
@@ -17,6 +17,13 @@
                 <x-label for="name" :value="__('Name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <!-- username -->
+            <div class="mt-4">
+                <x-label for=username :value="__('Username')" />
+
+                <x-input id=username class="block mt-1 w-full" type="text" name=username :value="old('username')" required />
             </div>
 
             <!-- Email Address -->

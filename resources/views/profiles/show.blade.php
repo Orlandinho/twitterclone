@@ -10,7 +10,7 @@
 
             <x-profile :user="$user"/>
 
-            <div class="border border-gray-300 rounded-lg">
+            <div class="border border-gray-300 mb-4 rounded-lg">
 
                 <x-timeline :tweets="$tweets"/>
 

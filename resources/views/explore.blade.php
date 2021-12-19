@@ -7,17 +7,13 @@
         </div>
 
         <div class="lg:flex-1 lg:mx-10" style="max-width: 700px;">
-            <x-publish-tweet />
 
-            <div class="border border-gray-300 rounded-lg">
+            <x-explore-content :users="$users"/>
 
-                <x-timeline :tweets="$tweets"/>
-
-            </div>
         </div>
 
         <div class="lg:w-1/6">
-            <x-friends-list :tweets="$tweets"/>
+            <x-friends-list />
         </div>
 
     </div>

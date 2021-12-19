@@ -1,12 +1,12 @@
 @props(['tweets'])
 
-@foreach($tweets as $tweet)
-    <div class="flex p-4 border border-b border-gray-200">
+@forelse($tweets as $tweet)
+    <div class="flex p-4 {{ $loop->last ? '' : 'border-b border-b-gray-400' }} ">
         <div class="mr-2 flex-shrink-0">
             <a href="{{ route('profile', $tweet->user) }}">
-                <img src="https://i.pravatar.cc/50?img={{ $tweet->user_id }}"
+                <img src="{{ $tweet->user->avatar ? $tweet->user->avatar : 'avatars/default.jpeg' }}"
                     alt="avatar"
-                    class="rounded-full mr-4">
+                    class="rounded-full mr-4 w-14">
             </a>
         </div>
         <div>
@@ -16,5 +16,7 @@
             <p class="text-sm">{{ $tweet->body }}</p>
         </div>
     </div>
-@endforeach
+@empty
+    <p class="p-4">No tweets yet</p>
+@endforelse
 

@@ -1,3 +1,17 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .btn {
+        @apply text-xs ring-1 rounded-xl px-3 py-1;
+    }
+
+    .btn-primary {
+        @apply bg-blue-500 text-white hover:bg-white hover:text-blue-500 ring-blue-500;
+    }
+
+    .btn-red {
+        @apply bg-red-500 text-white hover:bg-white hover:text-red-500 ring-red-500;
+    }
+}

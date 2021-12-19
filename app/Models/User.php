@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
+        'avatar',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -44,17 +46,7 @@ class User extends Authenticatable
 
     public function tweets()
     {
-        return $this->hasMany(Tweet::class);
-    }
-
-    public function follows()
-    {
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
-    }
-
-    public function follow(User $user)
-    {
-        return $this->follows()->save($user);
+        return $this->hasMany(Tweet::class)->latest();
     }
 
     public function timeline()
@@ -71,8 +63,20 @@ class User extends Authenticatable
             ->get();
     }
 
-    public function getRouteKeyName()
+    public function path($append = '')
     {
-        return 'name'; //makes the model recover its data from this specific column from its table, which is id by default
+        $path = route('profile', $this->username);
+
+        return $append ? "{$path}/{$append}" : $path;
+    }
+
+    public function getAvatarAttribute($value)  // This is an accessor
+    {
+        return asset('storage/' . $value);
+    }
+
+    public function setPasswordAttribute($password) //This is a mutator. It has to use 'has' 'Something' 'Attribute' in order for it to work
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }
