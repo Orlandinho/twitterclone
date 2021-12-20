@@ -4,6 +4,7 @@ use App\Http\Controllers\ExplorerController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\TweetLikesController;
 use Illuminate\Support\Facades\Route;
 use function Sodium\crypto_box_keypair_from_secretkey_and_publickey;
 
@@ -21,18 +22,17 @@ use function Sodium\crypto_box_keypair_from_secretkey_and_publickey;
 Route::middleware('auth')->group(function(){
 
     Route::get('/', [TweetController::class, 'index'])->name('home');
-
     Route::post('/tweets', [TweetController::class, 'store']);
 
+    Route::post('/tweets/{tweet}/like', [TweetLikesController::class, 'store']);
+    Route::delete('/tweets/{tweet}/like', [TweetLikesController::class, 'destroy']);
+
     Route::get('/profiles/{user:username}', [ProfilesController::class, 'show'])->name('profile');
-
     Route::post('/profiles/{user:username}/follow', [FollowsController::class, 'store'])->name('follow');
-
     Route::get('/profiles/{user:username}/edit', [ProfilesController::class, 'edit'])->middleware('can:edit,user');
-
     Route::patch('/profiles/{user:username}', [ProfilesController::class, 'update'])->middleware('can:edit,user');
 
-    Route::get('/explore', [ExplorerController::class, 'index']);
+    Route::get('/explore', ExplorerController::class);  //there's only one method in this class and we can call it __invoke() to execute it automatically
 });
 
 Route::get('/welcome', function () {

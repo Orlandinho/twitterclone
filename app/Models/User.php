@@ -59,6 +59,7 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $friends)
             ->orWhere('user_id', $this->id)
+            ->withLikes()
             ->latest()
             ->get();
     }
@@ -78,5 +79,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($password) //This is a mutator. It has to use 'has' 'Something' 'Attribute' in order for it to work
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

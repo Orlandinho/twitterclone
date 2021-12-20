@@ -10,7 +10,7 @@
 
             <div class="flex justify-between items-center mb-6">
 
-                <div>
+                <div style="max-width: 270px;">
                     <h2 class="font-bold my-2 text-2xl">{{ $user->name }}</h2>
                     <p class="text-sm">Joined {{ $user->created_at->diffForHumans() }}</p>
                 </div>

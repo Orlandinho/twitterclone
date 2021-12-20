@@ -12,6 +12,7 @@
         <x-form.input name="password" type="password" required />
         <x-form.input name="password_confirmation" type="password" required />
         <x-form.button>Update</x-form.button>
+        <a href="{{ $user->path() }}" class="ml-4 hover:underline">Cancel</a>
 
     </form>
 </div>
